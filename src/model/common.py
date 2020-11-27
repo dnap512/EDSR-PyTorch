@@ -70,7 +70,7 @@ class Upsampler(nn.Sequential):
                 if act == 'relu':
                     m.append(nn.ReLU(True))
                 elif act == 'prelu':
-                    m.append(nn.PReLU(n_feats))
+                    m.append(nn.PReLU())
 
         elif scale == 3:
             m.append(conv(n_feats, 9 * n_feats, 3, bias))
