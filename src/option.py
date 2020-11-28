@@ -8,6 +8,11 @@ parser.add_argument('--debug', action='store_true',
 parser.add_argument('--template', default='.',
                     help='You can set various templates in option.py')
 
+# MILab tune
+parser.add_argument('--rsc', type=bool, default=False,
+                   help='RSC training setting')
+
+
 # Hardware specifications
 parser.add_argument('--n_threads', type=int, default=6,
                     help='number of threads for data loading')
