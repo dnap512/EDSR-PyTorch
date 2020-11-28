@@ -45,7 +45,11 @@ class Trainer():
             timer_model.tic()
 
             self.optimizer.zero_grad()
-            sr = self.model(lr, 0)
+            if self.args.rsc:
+                sr = self.model.forwards(lr, 0, hr)
+            else:
+                sr = self.model(lr, 0)
+                
             loss = self.loss(sr, hr)
             loss.backward()
             if self.args.gclip > 0:
