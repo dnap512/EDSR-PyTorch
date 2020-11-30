@@ -7,6 +7,7 @@ import torch
 
 def get_patch(*args, patch_size=96, scale=2, multi=False, input_large=False):
     ih, iw = args[0].shape[:2]
+
     if not input_large:
         p = scale if multi else 1
         tp = p * patch_size
@@ -22,8 +23,7 @@ def get_patch(*args, patch_size=96, scale=2, multi=False, input_large=False):
         tx, ty = scale * ix, scale * iy
     else:
         tx, ty = ix, iy
-    
-    
+
     ret = [
         args[0][iy:iy + ip, ix:ix + ip, :],
         *[a[ty:ty + tp, tx:tx + tp, :] for a in args[1:]]
@@ -48,16 +48,8 @@ def set_channel(*args, n_channels=3):
 
 def np2Tensor(*args, rgb_range=255):
     def _np2Tensor(img):
-        try:
-            np_transpose = np.ascontiguousarray(img.transpose((2, 0, 1)))
-            tensor = torch.from_numpy(np_transpose).float()
-        except:
-            print(img)
-            print(np_transpose)
-            np_transpose = np.ascontiguousarray(img.transpose((2, 0, 1)))
-            tensor = torch.from_numpy(np_transpose).float()
-            exit(True)
-
+        np_transpose = np.ascontiguousarray(img.transpose((2, 0, 1)))
+        tensor = torch.from_numpy(np_transpose).float()
         tensor.mul_(rgb_range / 255)
 
         return tensor

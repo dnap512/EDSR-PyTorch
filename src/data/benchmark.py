@@ -15,6 +15,7 @@ class Benchmark(srdata.SRData):
         )
 
     def _set_filesystem(self, dir_data):
+        print("name: ", self.name)
         self.apath = os.path.join(dir_data, 'benchmark', self.name)
         self.dir_hr = os.path.join(self.apath, 'HR')
         if self.input_large:
