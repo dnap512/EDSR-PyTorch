@@ -2,7 +2,7 @@ import argparse
 import template
 
 parser = argparse.ArgumentParser(description='EDSR and MDSR')
-parser.add_argument('--use_data', required = True, type = str)
+parser.add_argument('--use_data', default = None, type = str, required=True)
 
 parser.add_argument('--debug', action='store_true',
                     help='Enables debug mode')

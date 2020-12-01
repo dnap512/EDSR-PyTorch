@@ -26,9 +26,8 @@ class SRData(data.Dataset):
         if args.ext.find('img') < 0:
             path_bin = os.path.join(self.apath, 'bin')
             os.makedirs(path_bin, exist_ok=True)
-
-        list_hr, list_lr = self._scan()
         
+        list_hr, list_lr = self._scan()
         if args.ext.find('img') >= 0 or benchmark:
             self.images_hr, self.images_lr = list_hr, list_lr
         elif args.ext.find('sep') >= 0:
@@ -60,14 +59,9 @@ class SRData(data.Dataset):
 
                     self._check_and_load(args.ext, l, b, verbose=True)
             
-            self.images_hr = sorted(self.images_hr, key = lambda a: a.split('/')[-1])
-            self.images_lr[0] = sorted(self.images_lr[0], key = lambda a: a.split('/')[-1])
-#             print(self.images_hr[:8])
-#             print(self.images_lr[0][:8])
-#             exit(True)
+        self.images_hr = sorted(self.images_hr, key = lambda a: a.split('/')[-1])
+        self.images_lr[0] = sorted(self.images_lr[0], key = lambda a: a.split('/')[-1])
         if train:
-#             print(args.batch_size, args.test_every)
-#             exit(True)
             n_patches = args.batch_size * args.test_every
             
             n_images = len(args.data_train) * len(self.images_hr)
@@ -82,6 +76,7 @@ class SRData(data.Dataset):
 #             print(n_images)
 #             print(self.repeat)
 #             exit(True)
+
     # Below functions as used to prepare images
     def _scan(self):
         names_hr = sorted(
@@ -90,7 +85,6 @@ class SRData(data.Dataset):
         names_lr = [[] for _ in self.scale]
         for f in names_hr:
             filename, _ = os.path.splitext(os.path.basename(f))
-            
             for d in self.dir_lr:
                 for si, s in enumerate(self.scale):
                     names_lr[si].append(os.path.join(
@@ -129,9 +123,9 @@ class SRData(data.Dataset):
         return pair_t[0], pair_t[1], filename
 
     def __len__(self):
-        print("="*1000)
-        print("images_hr length : ", len(self.images_hr))
-        print("repeat : ", self.repeat)
+#         print("="*1000)
+#         print("images_hr length : ", len(self.images_hr))
+#         print("repeat : ", self.repeat)
         if self.train:
             return len(self.images_hr) * self.repeat
         else:
