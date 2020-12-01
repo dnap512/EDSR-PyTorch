@@ -1,5 +1,4 @@
-**About PyTorch 1.2.0**
-  * This repository is forked from https://github.com/thstkdgus35/EDSR-PyTorch
+This repository was forked from https://github.com/thstkdgus35/EDSR-PyTorch
 
 # SR-RSC
 
