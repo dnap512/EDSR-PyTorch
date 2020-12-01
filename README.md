@@ -23,6 +23,12 @@ cd src       # You are now in */EDSR-PyTorch/src
 sh demo.sh
 ```
 
+you can Test with this command
+```bash
+cd src       # You are now in */EDSR-PyTorch/src
+python main.py --data_test Set5+Set14+B100+Urban100 --scale 4 --pre_train {your model} --test_only --dir_data dataset --use_data MB_ML_OB_OL
+```
+
 
 
 You can evaluate your models with widely-used benchmark datasets:
